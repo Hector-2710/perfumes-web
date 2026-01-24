@@ -1,14 +1,9 @@
-from enum import Enum
 from uuid import UUID, uuid4
 from datetime import datetime
 from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 from app.models.shopping import Cart, Order
-
-class ProductType(str, Enum):
-    SEALED = "sealed"
-    DECANT = "decant"
-    NONE = "none"
+from app.core.enums import ProductType
 
 class UserBase(SQLModel):
     email: str = Field(unique=True, index=True)
