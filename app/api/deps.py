@@ -4,6 +4,7 @@ from app.db.database import GetSession
 from app.core.config import settings
 from app.core.security import decode_token
 from app.models.core import User
+from typing import Annotated
 
 reusable_oauth2 = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_PREFIX}/auth/login"
@@ -38,3 +39,7 @@ async def get_current_active_admin(db: GetSession, current_user: User = Depends(
             status_code=status.HTTP_403_FORBIDDEN, detail="The user doesn't have enough privileges"
         )
     return current_user
+
+
+GetCurrentUser = Annotated[User, Depends(get_current_user)]
+GetCurrentActiveAdmin = Annotated[User, Depends(get_current_active_admin)]
