@@ -4,11 +4,15 @@ from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.models.core import User
 from app.core.security import get_password_hash
+from app.core.exceptions import UserNotFoundError, DuplicateEntityError
 
 class UserService:
     @staticmethod
-    async def get_by_id(db: AsyncSession, user_id: UUID) -> Optional[User]:
-        return await db.get(User, user_id)
+    async def get_by_id(db: AsyncSession, user_id: UUID) -> User:
+        user = await db.get(User, user_id)
+        if not user:
+            raise UserNotFoundError(user_id)
+        return user
 
     @staticmethod
     async def get_by_email(db: AsyncSession, email: str) -> Optional[User]:
@@ -24,6 +28,11 @@ class UserService:
 
     @staticmethod
     async def create(db: AsyncSession, user_data: dict) -> User:
+        if await UserService.get_by_email(db, user_data["email"]):
+            raise DuplicateEntityError("User", "email", user_data["email"])
+        if await UserService.get_by_username(db, user_data["username"]):
+            raise DuplicateEntityError("User", "username", user_data["username"])
+
         user_data["hashed_password"] = get_password_hash(user_data.pop("password"))
         db_user = User(**user_data)
         db.add(db_user)
