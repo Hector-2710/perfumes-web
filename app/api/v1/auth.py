@@ -9,9 +9,9 @@ router = APIRouter()
 
 @router.post("/register", response_model=dict)
 async def register(user_in: UserRegister, db: GetSession):
-    return await auth_service.register(db, user_in.dict())
+    return await auth_service.register(db, user_in)
 
 
 @router.post("/login", response_model=Token)
 async def login(db: GetSession, form_data: OAuth2PasswordRequestForm = Depends()):
-    return await auth_service.authenticate(db, username=form_data.username, password=form_data.password)
+    return await auth_service.authenticate(db, form_data.username, form_data.password)
