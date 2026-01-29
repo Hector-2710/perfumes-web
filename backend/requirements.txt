@@ -1,0 +1,15 @@
+fastapi[all]
+sqlmodel
+asyncpg
+alembic
+pyjwt
+pwdlib[argon2]
+pydantic-settings
+redis
+python-multipart
+pytest
+pytest-asyncio
+httpx
+ruff
+black
+mypy
