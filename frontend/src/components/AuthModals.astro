@@ -1,0 +1,353 @@
+---
+
+---
+
+<div id="auth-modal-overlay" class="modal-overlay hidden">
+    <div class="modal-content glass">
+        <button id="close-modal" class="close-btn">&times;</button>
+
+        <!-- Login Form -->
+        <div id="login-form-container" class="form-container">
+            <h2>Bienvenido de Nuevo</h2>
+            <p class="subtitle">Ingresa tus credenciales para continuar</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="login-email">Username or Email</label>
+                    <input
+                        type="text"
+                        id="login-email"
+                        placeholder="tu@email.com"
+                        required
+                    />
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Contraseña</label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        placeholder="••••••••"
+                        required
+                    />
+                </div>
+                <button type="submit" class="submit-btn">Iniciar Sesión</button>
+            </form>
+            <p class="switch-form">
+                ¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a>
+            </p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form-container" class="form-container hidden">
+            <h2>Crea tu Cuenta</h2>
+            <p class="subtitle">Únete a la comunidad EssenciaRabe</p>
+            <form id="register-form">
+                <div class="input-group">
+                    <label for="reg-name">Nombre Completo</label>
+                    <input
+                        type="text"
+                        id="reg-name"
+                        placeholder="Juan Pérez"
+                        required
+                    />
+                </div>
+                <div class="input-group">
+                    <label for="reg-username">Nombre de Usuario</label>
+                    <input
+                        type="text"
+                        id="reg-username"
+                        placeholder="juanperez123"
+                        required
+                    />
+                </div>
+                <div class="input-group">
+                    <label for="reg-email">Email</label>
+                    <input
+                        type="text"
+                        id="reg-email"
+                        placeholder="tu@email.com"
+                        required
+                    />
+                </div>
+                <div class="input-group">
+                    <label for="reg-password">Contraseña</label>
+                    <input
+                        type="password"
+                        id="reg-password"
+                        placeholder="••••••••"
+                        required
+                    />
+                </div>
+                <button type="submit" class="submit-btn" id="reg-submit"
+                    >Crear Cuenta</button
+                >
+            </form>
+            <p class="switch-form">
+                ¿Ya tienes cuenta? <a href="#" id="show-login">Inicia Sesión</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        backdrop-filter: blur(8px);
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .modal-content {
+        width: 90%;
+        max-width: 480px;
+        padding: 48px;
+        border-radius: 20px;
+        position: relative;
+        background: var(--color-bg-white);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        animation: modalSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes modalSlideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    h2 {
+        margin-bottom: 8px;
+        color: var(--color-text-main);
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        color: var(--color-text-muted);
+        font-size: 1rem;
+        margin-bottom: 32px;
+    }
+
+    .input-group {
+        margin-bottom: 24px;
+        text-align: left;
+    }
+
+    .input-group label {
+        display: block;
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        color: var(--color-text-muted);
+        font-weight: 500;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 14px 16px;
+        background: var(--color-bg-page);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        color: var(--color-text-main);
+        font-size: 1rem;
+        transition: all 0.2s;
+    }
+
+    .input-group input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        background: white;
+        box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-top: 12px;
+    }
+
+    .submit-btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+
+    .switch-form {
+        margin-top: 32px;
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        text-align: center;
+    }
+
+    .switch-form a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 500;
+    }
+</style>
+
+<script>
+    const overlay = document.getElementById("auth-modal-overlay");
+    const loginForm = document.getElementById("login-form-container");
+    const registerForm = document.getElementById("register-form-container");
+
+    const showLoginBtn = document.getElementById("show-login");
+    const showRegisterBtn = document.getElementById("show-register");
+    const closeModal = document.getElementById("close-modal");
+
+    // Trigger elements from Island (will be handled by event delegation or global events)
+    document.addEventListener("open-auth", (e: any) => {
+        overlay?.classList.remove("hidden");
+        if (e.detail.mode === "login") {
+            loginForm?.classList.remove("hidden");
+            registerForm?.classList.add("hidden");
+        } else {
+            loginForm?.classList.add("hidden");
+            registerForm?.classList.remove("hidden");
+        }
+    });
+
+    showLoginBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginForm?.classList.remove("hidden");
+        registerForm?.classList.add("hidden");
+    });
+
+    showRegisterBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginForm?.classList.add("hidden");
+        registerForm?.classList.remove("hidden");
+    });
+
+    closeModal?.addEventListener("click", () => {
+        overlay?.classList.add("hidden");
+    });
+
+    overlay?.addEventListener("click", (e) => {
+        if (e.target === overlay) overlay.classList.add("hidden");
+    });
+
+    // --- API INTEGRATION ---
+    const API_URL = "http://localhost:8000/api/v1";
+
+    // Handle Login
+    document
+        .getElementById("login-form")
+        ?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = (
+                document.getElementById("login-email") as HTMLInputElement
+            ).value;
+            const password = (
+                document.getElementById("login-password") as HTMLInputElement
+            ).value;
+            const submitBtn = e.target as HTMLFormElement;
+
+            try {
+                // OAuth2PasswordRequestForm expects x-www-form-urlencoded
+                const formData = new URLSearchParams();
+                formData.append("username", email); // FastAPI uses 'username' field for the login identifier
+                formData.append("password", password);
+
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem("token", data.access_token);
+                    alert("¡Sesión iniciada con éxito!");
+                    overlay?.classList.add("hidden");
+                    window.location.reload(); // Refresh to update UI state
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.detail || "Credenciales inválidas"}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("No se pudo conectar con el servidor.");
+            }
+        });
+
+    // Handle Register
+    document
+        .getElementById("register-form")
+        ?.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const full_name = (
+                document.getElementById("reg-name") as HTMLInputElement
+            ).value;
+            const username = (
+                document.getElementById("reg-username") as HTMLInputElement
+            ).value;
+            const email = (
+                document.getElementById("reg-email") as HTMLInputElement
+            ).value;
+            const password = (
+                document.getElementById("reg-password") as HTMLInputElement
+            ).value;
+
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        full_name,
+                        username,
+                        email,
+                        password,
+                    }),
+                });
+
+                if (response.ok) {
+                    alert("¡Cuenta creada! Ahora puedes iniciar sesión.");
+                    // Switch to login form
+                    loginForm?.classList.remove("hidden");
+                    registerForm?.classList.add("hidden");
+                } else {
+                    const error = await response.json();
+                    alert(
+                        `Error: ${error.detail || "No se pudo crear la cuenta"}`,
+                    );
+                }
+            } catch (err) {
+                console.error(err);
+                alert("No se pudo conectar con el servidor.");
+            }
+        });
+</script>
