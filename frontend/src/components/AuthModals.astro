@@ -262,92 +262,70 @@
     const API_URL = "http://localhost:8000/api/v1";
 
     // Handle Login
-    document
-        .getElementById("login-form")
-        ?.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const email = (
-                document.getElementById("login-email") as HTMLInputElement
-            ).value;
-            const password = (
-                document.getElementById("login-password") as HTMLInputElement
-            ).value;
-            const submitBtn = e.target as HTMLFormElement;
+    document.getElementById("login-form")?.addEventListener("submit", async (e) => {e.preventDefault();
+        const email = (document.getElementById("login-email") as HTMLInputElement).value;
+        const password = (document.getElementById("login-password") as HTMLInputElement).value;
 
-            try {
-                // OAuth2PasswordRequestForm expects x-www-form-urlencoded
-                const formData = new URLSearchParams();
-                formData.append("username", email); // FastAPI uses 'username' field for the login identifier
-                formData.append("password", password);
+        try {
+            const formData = new URLSearchParams();
+            formData.append("username", email);
+            formData.append("password", password);
 
-                const response = await fetch(`${API_URL}/auth/login`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: formData,
-                });
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: formData,
+            });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    localStorage.setItem("token", data.access_token);
-                    alert("¡Sesión iniciada con éxito!");
-                    overlay?.classList.add("hidden");
-                    window.location.reload(); // Refresh to update UI state
-                } else {
-                    const error = await response.json();
-                    alert(`Error: ${error.detail || "Credenciales inválidas"}`);
-                }
-            } catch (err) {
-                console.error(err);
-                alert("No se pudo conectar con el servidor.");
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem("token", data.access_token);
+                alert("¡Sesión iniciada con éxito!");
+                overlay?.classList.add("hidden");
+                window.location.reload(); 
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.detail || "Credenciales inválidas"}`);
             }
-        });
+        } catch (err) {
+            console.error(err);
+            alert("No se pudo conectar con el servidor.");
+        }
+    });
 
     // Handle Register
-    document
-        .getElementById("register-form")
-        ?.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const full_name = (
-                document.getElementById("reg-name") as HTMLInputElement
-            ).value;
-            const username = (
-                document.getElementById("reg-username") as HTMLInputElement
-            ).value;
-            const email = (
-                document.getElementById("reg-email") as HTMLInputElement
-            ).value;
-            const password = (
-                document.getElementById("reg-password") as HTMLInputElement
-            ).value;
+    document.getElementById("register-form")?.addEventListener("submit", async (e) => {e.preventDefault();
+        const full_name = (document.getElementById("reg-name") as HTMLInputElement).value;
+        const username = (document.getElementById("reg-username") as HTMLInputElement).value;
+        const email = (document.getElementById("reg-email") as HTMLInputElement).value;
+        const password = (document.getElementById("reg-password") as HTMLInputElement).value;
 
-            try {
-                const response = await fetch(`${API_URL}/auth/register`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        full_name,
-                        username,
-                        email,
-                        password,
+        try {
+            const response = await fetch(`${API_URL}/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    full_name: full_name,
+                    username: username,
+                        email: email,
+                        password: password,
                     }),
                 });
 
-                if (response.ok) {
-                    alert("¡Cuenta creada! Ahora puedes iniciar sesión.");
-                    // Switch to login form
-                    loginForm?.classList.remove("hidden");
-                    registerForm?.classList.add("hidden");
-                } else {
-                    const error = await response.json();
-                    alert(
-                        `Error: ${error.detail || "No se pudo crear la cuenta"}`,
-                    );
-                }
-            } catch (err) {
-                console.error(err);
-                alert("No se pudo conectar con el servidor.");
+            if (response.ok) {
+                alert("¡Cuenta creada! Ahora puedes iniciar sesión.");
+                // Switch to login form
+                loginForm?.classList.remove("hidden");
+                registerForm?.classList.add("hidden");
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.detail || "No se pudo crear la cuenta"}`);
             }
-        });
+        } catch (err) {
+            console.error(err);
+            alert("No se pudo conectar con el servidor.");
+        }
+    });
 </script>
