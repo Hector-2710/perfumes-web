@@ -3,18 +3,13 @@ from datetime import datetime
 from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
 from app.core.enums import ProductType, OrderStatus
-
-class UserBase(SQLModel):
-    email: str = Field(unique=True, index=True)
-    username: str = Field(unique=True, index=True)
-    full_name: Optional[str] = None
-    phone: Optional[str] = None
-    is_active: bool = True
-    is_admin: bool = False
+from app.models.user import UserBase
 
 class User(UserBase, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     hashed_password: str
+    is_active: bool = Field(default=True)
+    is_admin: bool = Field(default=False)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     
