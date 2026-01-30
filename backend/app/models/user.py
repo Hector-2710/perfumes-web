@@ -1,26 +1,23 @@
-from sqlmodel import SQLModel
 from typing import Optional
-from uuid import UUID
 from pydantic import EmailStr
+from sqlmodel import SQLModel, Field
+from uuid import UUID
 
-class UserRegister(SQLModel):
-    email: EmailStr
-    username: str
-    password: str
-    full_name: str = None
-
-class UserUpdate(SQLModel):
-    email: Optional[EmailStr] = None
-    username: Optional[str] = None
+class UserBase(SQLModel):
+    email: EmailStr = Field(unique=True, index=True)
+    username: str = Field(unique=True, index=True)
     full_name: Optional[str] = None
     phone: Optional[str] = None
+
+class UserRegister(UserBase):
+    password: str
+
+class UserUpdate(UserBase):
+    email: Optional[EmailStr] = None
+    username: Optional[str] = None
     password: Optional[str] = None
 
-class UserResponse(SQLModel):
+class UserResponse(UserBase):
     id: UUID
-    email: EmailStr
-    username: str
-    full_name: Optional[str]
-    phone: Optional[str]
-    is_active: bool
-    is_admin: bool
+
+
