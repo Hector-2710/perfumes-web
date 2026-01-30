@@ -1,0 +1,89 @@
+---
+import PerfumeCard from "./PerfumeCard.astro";
+
+const perfumes: {
+    id: string;
+    name: string;
+    brand: string;
+    price: number;
+    image: string;
+    type: "sealed" | "decant";
+}[] = [
+    {
+        id: "1",
+        name: "Asad",
+        brand: "Lattafa",
+        price: 35000,
+        image: "/images/perfume1.png",
+        type: "sealed",
+    },
+    {
+        id: "2",
+        name: "Khamrah",
+        brand: "Lattafa",
+        price: 42000,
+        image: "/images/perfume2.png",
+        type: "sealed",
+    },
+    {
+        id: "3",
+        name: "Club de Nuit Intense",
+        brand: "Armaf",
+        price: 45000,
+        image: "/images/perfume3.png",
+        type: "sealed",
+    },
+    {
+        id: "4",
+        name: "Elysium (Decant)",
+        brand: "Roja Dove",
+        price: 15000,
+        image: "/images/perfume4.png",
+        type: "decant",
+    },
+    {
+        id: "5",
+        name: "Layton (Decant)",
+        brand: "Parfums de Marly",
+        price: 18000,
+        image: "/images/perfume5.png",
+        type: "decant",
+    },
+    {
+        id: "6",
+        name: "Hawas",
+        brand: "Rasasi",
+        price: 38000,
+        image: "/images/perfume6.png",
+        type: "sealed",
+    },
+];
+---
+
+<section class="perfume-grid-container">
+    <div class="grid">
+        {perfumes.map((perfume) => <PerfumeCard {...perfume} />)}
+    </div>
+</section>
+
+<style>
+    .perfume-grid-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 24px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 32px;
+    }
+
+    @media (max-width: 640px) {
+        .grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+    }
+</style>
