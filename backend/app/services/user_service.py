@@ -1,20 +1,12 @@
-from typing import Optional, List
-from uuid import UUID
+from typing import Optional
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.models.core import User
-from app.core.security import get_password_hash
-from app.core.exceptions import UserNotFoundError, DuplicateEntityError
 from app.models.user import UserRegister
+from app.core.security import get_password_hash
+from app.core.exceptions import DuplicateEntityError
 
 class UserService:
-    @staticmethod
-    async def get_by_id(db: AsyncSession, user_id: UUID) -> User:
-        user = await db.get(User, user_id)
-        if not user:
-            raise UserNotFoundError(user_id)
-        return user
-
     @staticmethod
     async def get_by_email(db: AsyncSession, email: str) -> Optional[User]:
         statement = select(User).where(User.email == email)
@@ -63,11 +55,5 @@ class UserService:
     async def delete(db: AsyncSession, db_user: User) -> None:
         await db.delete(db_user)
         await db.commit()
-
-    @staticmethod
-    async def get_multi(db: AsyncSession, skip: int = 0, limit: int = 100) -> List[User]:
-        statement = select(User).offset(skip).limit(limit)
-        result = await db.execute(statement)
-        return result.scalars().all()
 
 user_service = UserService()
