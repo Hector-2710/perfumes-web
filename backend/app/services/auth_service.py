@@ -5,6 +5,7 @@ from app.services.user_service import user_service
 from app.core.config import settings
 from app.core.exceptions import AuthenticationError
 from app.models.token import Token
+from app.models.user import UserRegister
 
 class AuthService:
     @staticmethod
@@ -28,7 +29,7 @@ class AuthService:
         )
 
     @staticmethod
-    async def register(db: AsyncSession, user_data: dict) -> dict:
+    async def register(db: AsyncSession, user_data: UserRegister) -> dict:
         await user_service.create(db, user_data)
         return {"message": "User created successfully"}
 
