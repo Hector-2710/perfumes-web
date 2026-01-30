@@ -5,6 +5,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.models.core import User
 from app.core.security import get_password_hash
 from app.core.exceptions import UserNotFoundError, DuplicateEntityError
+from app.models.user import UserRegister
 
 class UserService:
     @staticmethod
@@ -27,18 +28,23 @@ class UserService:
         return result.scalar_one_or_none()
 
     @staticmethod
-    async def create(db: AsyncSession, user_data: dict) -> User:
-        if await UserService.get_by_email(db, user_data["email"]):
-            raise DuplicateEntityError("User", "email", user_data["email"])
-        if await UserService.get_by_username(db, user_data["username"]):
-            raise DuplicateEntityError("User", "username", user_data["username"])
+    async def create(db: AsyncSession, user_data: UserRegister) -> User:
+        if await UserService.get_by_email(db, user_data.email):
+            raise DuplicateEntityError("User", "email", user_data.email)
+        if await UserService.get_by_username(db, user_data.username):
+            raise DuplicateEntityError("User", "username", user_data.username)
 
-        user_data["hashed_password"] = get_password_hash(user_data.pop("password"))
-        db_user = User(**user_data)
-        db.add(db_user)
+        hashed_password = get_password_hash(user_data.password)
+        user = User(
+            email=user_data.email,
+            username=user_data.username,
+            full_name=user_data.full_name,
+            hashed_password=hashed_password
+        )
+        db.add(user)
         await db.commit()
-        await db.refresh(db_user)
-        return db_user
+        await db.refresh(user)
+        return user
 
     @staticmethod
     async def update(db: AsyncSession, db_user: User, user_data: dict) -> User:
