@@ -7,6 +7,13 @@
         <div class="nav-left">
             <span class="logo">Essenciarabe</span>
         </div>
+        <div class="nav-center">
+            <a href="/" class="nav-link">Tienda</a>
+            <a href="nosotros" class="nav-link">Nosotros</a>
+            <a href="contacto" class="nav-link">Contacto</a>
+            <a href="decants" class="nav-link">Decants</a>
+            <a href="perfumes" class="nav-link">Perfumes</a>
+        </div>
         <div class="nav-right" id="nav-actions">
             <!-- Botones iniciales para prevenir parpadeo (SSR) -->
             <button id="login-btn" class="nav-link">Iniciar Sesión</button>
@@ -44,6 +51,14 @@
         letter-spacing: -0.5px;
     }
 
+    .nav-center {
+        display: flex;
+        gap: 32px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     .nav-right {
         display: flex;
         gap: 24px;
@@ -53,11 +68,14 @@
     .nav-link {
         background: none;
         border: none;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         color: var(--color-text-main);
+        text-decoration: none;
         opacity: 0.8;
         cursor: pointer;
-        transition: opacity 0.2s;
+        transition:
+            opacity 0.2s,
+            color 0.2s;
     }
 
     .nav-link:hover {
@@ -65,12 +83,12 @@
         color: var(--color-primary);
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
+        .nav-center {
+            display: none;
+        }
         .nav-content {
             padding: 0 16px;
-        }
-        .nav-link {
-            display: none;
         }
     }
 
