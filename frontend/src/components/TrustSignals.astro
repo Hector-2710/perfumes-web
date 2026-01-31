@@ -1,0 +1,112 @@
+---
+
+---
+
+<section class="trust-signals">
+    <div class="container">
+        <div class="signal-grid">
+            <div class="signal-item">
+                <div class="icon-wrapper">
+                    <span class="emoji-icon">🛡️</span>
+                </div>
+                <h3>Originalidad 100%</h3>
+                <p>Garantizamos la autenticidad de cada perfume y decant.</p>
+            </div>
+
+            <div class="signal-item">
+                <div class="icon-wrapper">
+                    <span class="emoji-icon">🚚</span>
+                </div>
+                <h3>Envíos Rápidos</h3>
+                <p>Entregas en temuco o retiro en domicilio en pocas horas.</p>
+            </div>
+
+            <div class="signal-item">
+                <div class="icon-wrapper">
+                    <span class="emoji-icon">💬</span>
+                </div>
+                <h3>Asesoría Experta</h3>
+                <p>Te ayudamos a encontrar tu fragancia ideal.</p>
+            </div>
+
+            <div class="signal-item">
+                <div class="icon-wrapper">
+                    <span class="emoji-icon">⭐</span>
+                </div>
+                <h3>Calidad Premium</h3>
+                <p>Selección de los mejores perfumes árabes.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .trust-signals {
+        padding: 60px 0;
+        background-color: var(--color-background);
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .signal-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 40px;
+    }
+
+    .signal-item {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .icon-wrapper {
+        width: 64px;
+        height: 64px;
+        background-color: #f5f5f7;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .emoji-icon {
+        font-size: 2rem;
+    }
+
+    .signal-item:hover .icon-wrapper {
+        transform: translateY(-5px);
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--color-text-main);
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+        max-width: 200px;
+    }
+
+    @media (max-width: 768px) {
+        .trust-signals {
+            padding: 40px 0;
+        }
+        .signal-grid {
+            gap: 30px;
+        }
+    }
+</style>
