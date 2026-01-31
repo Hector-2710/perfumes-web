@@ -1,65 +1,49 @@
 ---
-import "../style.css";
-import DynamicIsland from "../components/DynamicIsland.astro";
-import AuthModals from "../components/AuthModals.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 import PerfumeGrid from "../components/PerfumeGrid.astro";
 import TrustSignals from "../components/TrustSignals.astro";
 ---
 
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Essenciarabe</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <DynamicIsland />
-    <AuthModals />
+<MainLayout title="Essenciarabe - Inicio">
     <header class="hero">
-      <h1 class="hero-title">Essenciarabe</h1>
-      <p class="hero-subtitle">
-        Descubre la magia de la perfumería árabe <br /> Las fragancias mas exclusivas
-        en un solo lugar
-      </p>
+        <h1 class="hero-title">Essenciarabe</h1>
+        <p class="hero-subtitle">
+            Descubre la magia de la perfumería árabe <br /> Las fragancias mas exclusivas
+            en un solo lugar
+        </p>
     </header>
+
     <main>
-      <PerfumeGrid />
-      <TrustSignals />
+        <PerfumeGrid />
+        <TrustSignals />
     </main>
-    <style>
-      :root {
-        --font-main: "Outfit", sans-serif;
-      }
-      .hero {
+</MainLayout>
+
+<style>
+    .hero {
         padding: 120px 24px 40px;
         text-align: center;
         max-width: 900px;
         margin: 0 auto;
-      }
-      .hero-title {
+    }
+
+    .hero-title {
         font-size: clamp(3.5rem, 12vw, 6rem);
         margin-bottom: 16px;
         letter-spacing: -3px;
         font-weight: 600;
         color: var(--color-text-main);
-      }
-      .hero-subtitle {
+    }
+
+    .hero-subtitle {
         font-size: clamp(1.2rem, 4vw, 2rem);
         color: var(--color-text-muted);
         line-height: 1.2;
         font-weight: 500;
         letter-spacing: -0.5px;
-      }
-      main {
+    }
+
+    main {
         padding-bottom: 80px;
-      }
-    </style>
-  </body>
-</html>
+    }
+</style>
