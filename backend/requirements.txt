@@ -5,8 +5,10 @@ alembic
 pyjwt
 pwdlib[argon2]
 pydantic-settings
+email-validator
 redis
 python-multipart
+gunicorn
 pytest
 pytest-asyncio
 httpx
