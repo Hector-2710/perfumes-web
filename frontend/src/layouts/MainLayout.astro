@@ -1,0 +1,48 @@
+---
+import "../style.css";
+import DynamicIsland from "../components/DynamicIsland.astro";
+import AuthModals from "../components/AuthModals.astro";
+
+interface Props {
+    title?: string;
+}
+
+const { title = "Essenciarabe - Perfumería de Lujo" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <DynamicIsland />
+        <AuthModals />
+
+        <slot />
+
+        <style is:global>
+            :root {
+                --font-main: "Outfit", sans-serif;
+            }
+
+            body {
+                background-color: var(--color-background);
+                color: var(--color-text-main);
+                font-family: var(--font-main);
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </body>
+</html>
